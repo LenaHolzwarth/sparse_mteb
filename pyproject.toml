@@ -4,13 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mteb"
-version = "1.16.3"
-description = "Massive Text Embedding Benchmark"
+version = "0.1"
+description = "Massive Text Embedding Benchmark adapted for sparse embedding models"
 readme = "README.md"
 authors = [
-    { name = "MTEB Contributors", email = "niklas@huggingface.co" },
-    { email = "nouamane@huggingface.co" },
-    { email = "info@nils-reimers.de" },
+    { name = "Lena Holzwarth", email = "lena.holzwarth@student.uni-tuebingen.de" },
 ]
 license = { file = "LICENSE" }
 keywords = ["deep learning", "text embeddings", "benchmark"]
@@ -44,9 +42,7 @@ dependencies = [
 
 
 [project.urls]
-homepage = "https://github.com/embeddings-benchmark/mteb"
-"Huggingface Organization" = "https://huggingface.co/mteb"
-"Source Code" = "https://github.com/embeddings-benchmark/mteb"
+Source = "https://github.com/LenaHolzwarth/sparse_mteb"
 
 [project.scripts]
 mteb = "mteb.cli:main"
