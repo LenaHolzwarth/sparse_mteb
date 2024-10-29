@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import re
 
 import numpy as np
 import pandas as pd
@@ -426,3 +427,16 @@ def nAUC(
         abst_nauc = (abst_auc - flat_auc) / (or_auc - flat_auc)
 
     return abst_nauc
+
+
+# helper function to extract vocab
+def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: bool = True) -> [str]:
+    """Return a list of unique words ocurring in text that fulfill the specified token_pattern
+    The default token_pattern is the one used in the scikit-learn TfidfVectorizer class
+    """
+    print("get_vocab called!")
+    if lowercase:
+        vocab = [word for sent in text for word in re.findall(token_pattern, sent.lower())]
+    else:
+        vocab = [word for sent in text for word in re.findall(token_pattern, sent)]
+    return list(set(vocab))

@@ -7,7 +7,7 @@ from typing import Any
 import numpy as np
 import torch
 
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 from ..encoder_interface import PromptType
 from .e5_models import E5_PAPER_RELEASE_DATE, XLMR_LANGUAGES

@@ -8,9 +8,9 @@ import numpy as np
 import torch
 from sentence_transformers import CrossEncoder, SentenceTransformer
 
-import mteb
-from mteb.abstasks.TaskMetadata import TASK_TYPE
-from mteb.encoder_interface import PromptType
+import sparse_mteb.mteb
+from sparse_mteb.mteb.abstasks.TaskMetadata import TASK_TYPE
+from sparse_mteb.mteb.encoder_interface import PromptType
 
 from .wrapper import Wrapper
 

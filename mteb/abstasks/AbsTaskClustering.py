@@ -8,8 +8,8 @@ import numpy as np
 import tqdm
 from datasets import Dataset
 
-from mteb.encoder_interface import Encoder
-from mteb.load_results.task_results import ScoresDict
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.load_results.task_results import ScoresDict
 
 from ..evaluation.evaluators import ClusteringEvaluator
 from .AbsTask import AbsTask, DescriptiveStatistics

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from mteb.abstasks.AbsTaskSTS import AbsTaskSTS
-from mteb.abstasks.MultilingualTask import MultilingualTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.AbsTaskSTS import AbsTaskSTS
+from sparse_mteb.mteb.abstasks.MultilingualTask import MultilingualTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 _LANGUAGES = {
     "ko-ko": ["kor-Hang"],

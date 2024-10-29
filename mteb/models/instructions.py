@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import mteb
+import sparse_mteb.mteb
 
 # Prompts from
 # SEB: https://github.com/KennethEnevoldsen/scandinavian-embedding-benchmark/blob/c8376f967d1294419be1d3eb41217d04cd3a65d3/src/seb/registered_models/e5_instruct_models.py

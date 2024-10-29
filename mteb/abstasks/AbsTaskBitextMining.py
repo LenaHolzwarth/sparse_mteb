@@ -5,7 +5,7 @@ from typing import Any
 
 from datasets import Dataset
 
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 from ..evaluation.evaluators import BitextMiningEvaluator
 from ..load_results.task_results import HFSubset, ScoresDict

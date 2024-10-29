@@ -12,7 +12,7 @@ from sklearn.metrics.pairwise import (
     paired_manhattan_distances,
 )
 
-from mteb.encoder_interface import Encoder, EncoderWithSimilarity
+from sparse_mteb.mteb.encoder_interface import Encoder, EncoderWithSimilarity
 
 from .Evaluator import Evaluator
 

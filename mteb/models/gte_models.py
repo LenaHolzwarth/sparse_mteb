@@ -6,8 +6,8 @@ from typing import Any
 
 import numpy as np
 
-from mteb.encoder_interface import PromptType
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.encoder_interface import PromptType
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 from .instructions import task_to_instruction
 from .wrapper import Wrapper

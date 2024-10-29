@@ -6,8 +6,8 @@ from typing import Any
 
 import numpy as np
 
-from mteb.model_meta import ModelMeta
-from mteb.requires_package import requires_package
+from sparse_mteb.mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.requires_package import requires_package
 
 from .wrapper import Wrapper
 

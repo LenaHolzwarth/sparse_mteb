@@ -5,11 +5,11 @@ from typing import Any
 
 from datasets import Dataset
 
-from mteb.abstasks.MultilingualTask import MultilingualTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
-from mteb.encoder_interface import Encoder
-from mteb.evaluation.evaluators import RerankingEvaluator
-from mteb.load_results.task_results import ScoresDict
+from sparse_mteb.mteb.abstasks.MultilingualTask import MultilingualTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.evaluation.evaluators import RerankingEvaluator
+from sparse_mteb.mteb.load_results.task_results import ScoresDict
 
 from ....abstasks.AbsTaskReranking import AbsTaskReranking
 

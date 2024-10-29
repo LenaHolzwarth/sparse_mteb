@@ -7,8 +7,8 @@ from pathlib import Path
 
 import numpy as np
 
-from mteb.encoder_interface import Encoder
-from mteb.load_results.task_results import ScoresDict
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.load_results.task_results import ScoresDict
 
 from .AbsTask import AbsTask
 

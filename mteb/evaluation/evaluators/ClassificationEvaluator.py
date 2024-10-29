@@ -14,7 +14,7 @@ from sklearn.metrics import (
 from sklearn.neighbors import KNeighborsClassifier
 from torch import Tensor
 
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 from .Evaluator import Evaluator
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 arctic_m_v1_5 = ModelMeta(
     name="Snowflake/snowflake-arctic-embed-m-v1.5",

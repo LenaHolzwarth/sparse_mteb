@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 paraphrase_langs = [
     "ara_Arab",

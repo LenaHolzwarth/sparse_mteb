@@ -4,9 +4,9 @@ from typing import Any
 
 import datasets
 
-from mteb.abstasks.AbsTaskBitextMining import AbsTaskBitextMining
-from mteb.abstasks.MultilingualTask import MultilingualTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.AbsTaskBitextMining import AbsTaskBitextMining
+from sparse_mteb.mteb.abstasks.MultilingualTask import MultilingualTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 _LANGUAGES = [
     "ben-Beng",

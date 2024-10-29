@@ -8,15 +8,15 @@ from collections import Counter
 
 import pandas as pd
 
-from mteb.abstasks import AbsTask
-from mteb.abstasks.TaskMetadata import TASK_CATEGORY, TASK_DOMAIN, TASK_TYPE
-from mteb.languages import (
+from sparse_mteb.mteb.abstasks import AbsTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TASK_CATEGORY, TASK_DOMAIN, TASK_TYPE
+from sparse_mteb.mteb.languages import (
     ISO_TO_LANGUAGE,
     ISO_TO_SCRIPT,
     path_to_lang_codes,
     path_to_lang_scripts,
 )
-from mteb.tasks import *  # import all tasks
+from sparse_mteb.mteb.tasks import *  # import all tasks
 
 logger = logging.getLogger(__name__)
 

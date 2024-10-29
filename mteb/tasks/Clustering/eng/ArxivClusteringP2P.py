@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from mteb.abstasks.AbsTaskClustering import AbsTaskClustering
-from mteb.abstasks.AbsTaskClusteringFast import clustering_downsample
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.AbsTaskClustering import AbsTaskClustering
+from sparse_mteb.mteb.abstasks.AbsTaskClusteringFast import clustering_downsample
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 
 class ArxivClusteringP2P(AbsTaskClustering):

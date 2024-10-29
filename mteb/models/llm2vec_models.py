@@ -6,8 +6,8 @@ from typing import Any, Callable
 import numpy as np
 import torch
 
-from mteb.encoder_interface import Encoder, PromptType
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.encoder_interface import Encoder, PromptType
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 from .instructions import task_to_instruction
 from .sentence_transformer_wrapper import validate_task_to_prompt_name

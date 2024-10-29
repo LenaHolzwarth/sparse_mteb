@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from functools import partial
 
-from mteb.model_meta import ModelMeta, sentence_transformers_loader
+from sparse_mteb.mteb.model_meta import ModelMeta, sentence_transformers_loader
 
 mxbai_embed_large_v1 = ModelMeta(
     loader=partial(

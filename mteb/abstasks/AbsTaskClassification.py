@@ -7,7 +7,7 @@ from typing import Any
 import numpy as np
 import tqdm
 
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 from ..evaluation.evaluators import (
     kNNClassificationEvaluator,

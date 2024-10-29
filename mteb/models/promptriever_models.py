@@ -6,8 +6,8 @@ from typing import Any, Callable
 import numpy as np
 import torch
 
-from mteb.encoder_interface import Encoder
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 from .repllama_models import RepLLaMAWrapper
 from .wrapper import Wrapper

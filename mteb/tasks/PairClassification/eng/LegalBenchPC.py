@@ -4,8 +4,8 @@ from typing import Any
 
 import datasets
 
-from mteb.abstasks.AbsTaskPairClassification import AbsTaskPairClassification
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.AbsTaskPairClassification import AbsTaskPairClassification
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 _DATASET_COLUMN_MAP = [
     {

@@ -7,7 +7,7 @@ from typing import Any
 import numpy as np
 import torch
 
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 
 class Evaluator(ABC):

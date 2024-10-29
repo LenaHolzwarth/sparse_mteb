@@ -6,13 +6,13 @@ from typing import Any, Literal
 
 import numpy as np
 
-from mteb.encoder_interface import PromptType
-from mteb.model_meta import ModelMeta
-from mteb.models.sentence_transformer_wrapper import (
+from sparse_mteb.mteb.encoder_interface import PromptType
+from sparse_mteb.mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.models.sentence_transformer_wrapper import (
     get_prompt_name,
     validate_task_to_prompt_name,
 )
-from mteb.requires_package import requires_package
+from sparse_mteb.mteb.requires_package import requires_package
 
 from .wrapper import Wrapper
 

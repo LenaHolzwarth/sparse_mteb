@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from .deu.BlurbsClusteringP2P import *
+""" from .deu.BlurbsClusteringP2P import *
 from .deu.BlurbsClusteringS2S import *
 from .deu.TenKGnadClusteringP2P import *
-from .deu.TenKGnadClusteringS2S import *
+from .deu.TenKGnadClusteringS2S import * """
 from .eng.ArxivClusteringP2P import *
 from .eng.ArxivClusteringS2S import *
 from .eng.ArXivHierarchicalClustering import *
@@ -18,7 +18,7 @@ from .eng.StackExchangeClustering import *
 from .eng.StackExchangeClusteringP2P import *
 from .eng.TwentyNewsgroupsClustering import *
 from .eng.WikiCitiesClustering import *
-from .fra.AlloProfClusteringP2P import *
+""" from .fra.AlloProfClusteringP2P import *
 from .fra.AlloProfClusteringS2S import *
 from .fra.HALClusteringS2S import *
 from .jpn.LivedoorNewsClustering import *
@@ -43,3 +43,4 @@ from .spa.SpanishNewsClusteringP2P import *
 from .swe.swedn_clustering import *
 from .swe.SwednClustering import *
 from .zho.CMTEBClustering import *
+ """

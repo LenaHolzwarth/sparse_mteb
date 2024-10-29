@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from functools import partial
 
-from mteb.model_meta import ModelMeta, sentence_transformers_loader
+from sparse_mteb.mteb.model_meta import ModelMeta, sentence_transformers_loader
 
 rubert_tiny2 = ModelMeta(
     name="cointegrated/rubert-tiny2",

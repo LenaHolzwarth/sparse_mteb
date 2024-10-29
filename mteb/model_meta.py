@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Annotated, Any, Callable, Literal
 
 from pydantic import BaseModel, BeforeValidator, TypeAdapter
 
-from mteb.encoder_interface import Encoder
+from .encoder_interface import Encoder
 
 from .languages import ISO_LANGUAGE_SCRIPT
 

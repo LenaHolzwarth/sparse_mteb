@@ -7,11 +7,10 @@ import torch
 import tqdm
 from datasets import Dataset
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
-
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 from .Evaluator import Evaluator
-from .utils import cos_sim
+from .utils import cos_sim, get_vocab
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +36,7 @@ class BitextMiningEvaluator(Evaluator):
             else sentences["gold"]
         )
         self.task_name = task_name
+        self.vocab = get_vocab(self.sentences)
 
     def __call__(self, model: Encoder, *, encode_kwargs: dict[str, Any] = {}):
         scores = self.compute_metrics(model, encode_kwargs=encode_kwargs)
@@ -54,6 +54,7 @@ class BitextMiningEvaluator(Evaluator):
             embeddings[sub] = model.encode(
                 self.sentences[sub],
                 task_name=self.task_name,
+                vocab = self.vocab
                 **encode_kwargs,
             )
 

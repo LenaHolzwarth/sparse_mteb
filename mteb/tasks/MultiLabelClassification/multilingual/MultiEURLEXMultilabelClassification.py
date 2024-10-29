@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from mteb.abstasks.AbsTaskMultilabelClassification import (
+from sparse_mteb.mteb.abstasks.AbsTaskMultilabelClassification import (
     AbsTaskMultilabelClassification,
 )
-from mteb.abstasks.MultilingualTask import MultilingualTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.MultilingualTask import MultilingualTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 
 class MultiEURLEXMultilabelClassification(

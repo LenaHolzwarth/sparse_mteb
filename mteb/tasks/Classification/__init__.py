@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .ara.AJGT import *
+""" from .ara.AJGT import *
 from .ara.HotelReviewSentimentClassification import *
 from .ara.OnlineStoreReviewSentimentClassification import *
 from .ara.RestaurantReviewSentimentClassification import *
@@ -20,7 +20,7 @@ from .dan.DKHateClassification import *
 from .dan.LccSentimentClassification import *
 from .deu.GermanPoliticiansTwitterSentimentClassification import *
 from .deu.TenKGnadClassification import *
-from .ell.GreekLegalCodeClassification import *
+from .ell.GreekLegalCodeClassification import * """
 from .eng.AmazonPolarityClassification import *
 from .eng.ArxivClassification import *
 from .eng.Banking77Classification import *
@@ -39,7 +39,7 @@ from .eng.TweetSentimentExtractionClassification import *
 from .eng.TweetTopicSingleClassification import *
 from .eng.YahooAnswersTopicsClassification import *
 from .eng.YelpReviewFullClassification import *
-from .est.estonian_valence import *
+""" from .est.estonian_valence import *
 from .fas.PersianFoodSentimentClassification import *
 from .fil.FilipinoHateSpeechClassification import *
 from .fil.FilipinoShopeeReviewsClassification import *
@@ -65,11 +65,11 @@ from .kor.KorSarcasmClassification import *
 from .kur.KurdishSentimentClassification import *
 from .mal.MalayalamNewsClassification import *
 from .mar.MarathiNewsClassification import *
-from .mkd.MacedonianTweetSentimentClassification import *
+from .mkd.MacedonianTweetSentimentClassification import * 
 from .multilingual.AfriSentiClassification import *
-from .multilingual.AfriSentiLangClassification import *
+from .multilingual.AfriSentiLangClassification import *"""
 from .multilingual.AmazonCounterfactualClassification import *
-from .multilingual.AmazonReviewsClassification import *
+"""from .multilingual.AmazonReviewsClassification import *
 from .multilingual.CataloniaTweetClassification import *
 from .multilingual.CyrillicTurkicLangClassification import *
 from .multilingual.HinDialectClassification import *
@@ -142,3 +142,4 @@ from .zho.YueOpenriceReviewClassification import (
     YueOpenriceReviewClassification,  # noqa: F401
 )
 from .zul.IsiZuluNewsClassification import *
+ """

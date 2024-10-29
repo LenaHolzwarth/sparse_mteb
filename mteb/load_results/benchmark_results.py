@@ -9,15 +9,15 @@ from typing import Any, Callable, Literal
 import numpy as np
 from pydantic import BaseModel, ConfigDict
 
-from mteb.abstasks.AbsTask import AbsTask, ScoresDict
-from mteb.abstasks.TaskMetadata import (
+from sparse_mteb.mteb.abstasks.AbsTask import AbsTask, ScoresDict
+from sparse_mteb.mteb.abstasks.TaskMetadata import (
     ISO_LANGUAGE_SCRIPT,
     TASK_DOMAIN,
     TASK_TYPE,
 )
-from mteb.languages import ISO_LANGUAGE
-from mteb.load_results.task_results import TaskResult
-from mteb.models.overview import get_model_metas
+from sparse_mteb.mteb.languages import ISO_LANGUAGE
+from sparse_mteb.mteb.load_results.task_results import TaskResult
+from sparse_mteb.mteb.models.overview import get_model_metas
 
 Split = str
 Score = Any

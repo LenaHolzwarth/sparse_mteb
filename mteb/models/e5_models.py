@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from functools import partial
 
-from mteb.encoder_interface import PromptType
-from mteb.model_meta import ModelMeta, sentence_transformers_loader
+from sparse_mteb.mteb.encoder_interface import PromptType
+from sparse_mteb.mteb.model_meta import ModelMeta, sentence_transformers_loader
 
 E5_PAPER_RELEASE_DATE = "2024-02-08"
 XLMR_LANGUAGES = [

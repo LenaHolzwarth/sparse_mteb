@@ -10,7 +10,7 @@ from typing import Any
 
 from datasets import Features, Value, load_dataset
 
-from mteb.abstasks.TaskMetadata import HFSubset
+from sparse_mteb.mteb.abstasks.TaskMetadata import HFSubset
 
 from ..evaluation.evaluators import RetrievalEvaluator
 from ..load_results.task_results import ScoresDict

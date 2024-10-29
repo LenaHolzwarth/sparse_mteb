@@ -7,7 +7,7 @@ import sklearn
 import sklearn.cluster
 from sklearn import metrics
 
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 from .Evaluator import Evaluator
 

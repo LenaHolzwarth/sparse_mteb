@@ -15,9 +15,9 @@ from typing import Any
 import datasets
 from sentence_transformers import SentenceTransformer
 
-from mteb.encoder_interface import Encoder
-from mteb.model_meta import ModelMeta
-from mteb.models import model_meta_from_sentence_transformers
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.models import model_meta_from_sentence_transformers
 
 from ..abstasks import *
 from ..abstasks import AbsTask

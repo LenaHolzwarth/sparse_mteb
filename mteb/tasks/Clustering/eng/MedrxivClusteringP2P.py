@@ -4,12 +4,12 @@ import itertools
 
 from datasets import Dataset, DatasetDict
 
-from mteb.abstasks.AbsTaskClustering import AbsTaskClustering
-from mteb.abstasks.AbsTaskClusteringFast import (
+from sparse_mteb.mteb.abstasks.AbsTaskClustering import AbsTaskClustering
+from sparse_mteb.mteb.abstasks.AbsTaskClusteringFast import (
     AbsTaskClusteringFast,
     check_label_distribution,
 )
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 
 class MedrxivClusteringP2PFast(AbsTaskClusteringFast):

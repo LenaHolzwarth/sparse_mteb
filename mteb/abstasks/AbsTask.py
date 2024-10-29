@@ -13,10 +13,10 @@ import tqdm
 from datasets import Dataset, DatasetDict
 from sklearn.preprocessing import MultiLabelBinarizer
 
-from mteb.abstasks.stratification import _iterative_train_test_split
-from mteb.abstasks.TaskMetadata import HFSubset, TaskMetadata
-from mteb.encoder_interface import Encoder
-from mteb.languages import LanguageScripts
+from sparse_mteb.mteb.abstasks.stratification import _iterative_train_test_split
+from sparse_mteb.mteb.abstasks.TaskMetadata import HFSubset, TaskMetadata
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.languages import LanguageScripts
 
 logger = logging.getLogger(__name__)
 

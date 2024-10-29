@@ -3,8 +3,8 @@ from __future__ import annotations
 import logging
 from functools import partial
 
-from mteb.evaluation.evaluators.RetrievalEvaluator import DRESModel
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.evaluation.evaluators.RetrievalEvaluator import DRESModel
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 from .wrapper import Wrapper
 

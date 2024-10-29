@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from mteb.abstasks.AbsTaskSpeedTask import AbsTaskSpeedTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.AbsTaskSpeedTask import AbsTaskSpeedTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 
 class CPUSpeedTask(AbsTaskSpeedTask):

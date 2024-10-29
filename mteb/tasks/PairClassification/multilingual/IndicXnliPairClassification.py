@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from mteb.abstasks import AbsTaskPairClassification, MultilingualTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks import AbsTaskPairClassification, MultilingualTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 _LANGUAGES = {
     "as": ["asm-Beng"],

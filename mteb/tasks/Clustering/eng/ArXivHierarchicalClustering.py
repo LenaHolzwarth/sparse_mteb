@@ -4,8 +4,8 @@ import itertools
 
 from datasets import Dataset, DatasetDict
 
-from mteb.abstasks.AbsTaskClusteringFast import AbsTaskClusteringFast
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.AbsTaskClusteringFast import AbsTaskClusteringFast
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 N_SAMPLES = 2048
 

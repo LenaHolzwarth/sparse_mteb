@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from mteb.abstasks.MultilingualTask import MultilingualTask
-from mteb.abstasks.TaskMetadata import TaskMetadata
+from sparse_mteb.mteb.abstasks.MultilingualTask import MultilingualTask
+from sparse_mteb.mteb.abstasks.TaskMetadata import TaskMetadata
 
 from ....abstasks.AbsTaskReranking import AbsTaskReranking
 

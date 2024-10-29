@@ -8,7 +8,7 @@ import torch
 import tqdm
 from sklearn.metrics import average_precision_score
 
-from mteb.evaluation.evaluators.RetrievalEvaluator import RetrievalEvaluator
+from sparse_mteb.mteb.evaluation.evaluators.RetrievalEvaluator import RetrievalEvaluator
 
 from ...encoder_interface import Encoder, PromptType
 from .Evaluator import Evaluator

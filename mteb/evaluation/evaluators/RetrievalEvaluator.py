@@ -14,8 +14,8 @@ import torch
 import tqdm
 from sentence_transformers import CrossEncoder, SentenceTransformer
 
-from mteb.encoder_interface import Encoder, PromptType
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.encoder_interface import Encoder, PromptType
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 from .Evaluator import Evaluator
 from .utils import (

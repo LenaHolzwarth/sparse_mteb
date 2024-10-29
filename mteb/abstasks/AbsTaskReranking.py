@@ -4,8 +4,8 @@ from typing import Any
 
 from datasets import Dataset
 
-from mteb.encoder_interface import Encoder
-from mteb.load_results.task_results import ScoresDict
+from sparse_mteb.mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.load_results.task_results import ScoresDict
 
 from ..evaluation.evaluators import RerankingEvaluator
 from .AbsTask import AbsTask, DescriptiveStatistics

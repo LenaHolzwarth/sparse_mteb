@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from functools import partial
 
-from mteb.model_meta import ModelMeta, sentence_transformers_loader
+from sparse_mteb.mteb.model_meta import ModelMeta, sentence_transformers_loader
 
 model_prompts = {"query": "Represent this sentence for searching relevant passages: "}
 

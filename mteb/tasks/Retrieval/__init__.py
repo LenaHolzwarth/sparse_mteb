@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .ara.SadeemQuestionRetrieval import *
+""" from .ara.SadeemQuestionRetrieval import *
 from .code.AppsRetrieval import *
 from .code.CodeEditSearchRetrieval import *
 from .code.CodeFeedbackMTRetrieval import *
@@ -22,14 +22,14 @@ from .deu.GermanDPRRetrieval import *
 from .deu.GermanGovServiceRetrieval import *
 from .deu.GermanQuADRetrieval import *
 from .deu.LegalQuADRetrieval import *
-from .ell.GreekCivicsQA import *
-from .eng.AILACasedocsRetrieval import *
+from .ell.GreekCivicsQA import * """
+""" from .eng.AILACasedocsRetrieval import *
 from .eng.AILAStatutesRetrieval import *
 from .eng.AlphaNLIRetrieval import *
 from .eng.ARCChallengeRetrieval import *
 from .eng.ArguAnaRetrieval import *
 from .eng.BrightRetrieval import *
-from .eng.ClimateFEVERRetrieval import *
+from .eng.ClimateFEVERRetrieval import * """
 from .eng.CQADupstackAndroidRetrieval import *
 from .eng.CQADupstackEnglishRetrieval import *
 from .eng.CQADupstackGamingRetrieval import *
@@ -42,7 +42,7 @@ from .eng.CQADupstackTexRetrieval import *
 from .eng.CQADupstackUnixRetrieval import *
 from .eng.CQADupstackWebmastersRetrieval import *
 from .eng.CQADupstackWordpressRetrieval import *
-from .eng.DBPediaRetrieval import *
+""" from .eng.DBPediaRetrieval import *
 from .eng.FaithDialRetrieval import *
 from .eng.FeedbackQARetrieval import *
 from .eng.FEVERRetrieval import *
@@ -68,9 +68,9 @@ from .eng.NarrativeQARetrieval import *
 from .eng.NFCorpusRetrieval import *
 from .eng.NQRetrieval import *
 from .eng.PiqaRetrieval import *
-from .eng.QuailRetrieval import *
+from .eng.QuailRetrieval import * """
 from .eng.QuoraRetrieval import *
-from .eng.RARbCodeRetrieval import *
+""" from .eng.RARbCodeRetrieval import *
 from .eng.RARbMathRetrieval import *
 from .eng.SCIDOCSRetrieval import *
 from .eng.SciFactRetrieval import *
@@ -86,8 +86,8 @@ from .eng.TempReasonL3PureRetrieval import *
 from .eng.TopiOCQARetrieval import *
 from .eng.Touche2020Retrieval import *
 from .eng.TRECCOVIDRetrieval import *
-from .eng.WinoGrandeRetrieval import *
-from .est.estqa import *
+from .eng.WinoGrandeRetrieval import * """
+""" from .est.estqa import *
 from .fra.AlloprofRetrieval import *
 from .fra.BSARDRetrieval import *
 from .fra.FQuADRetrieval import *
@@ -100,12 +100,12 @@ from .jpn.NLPJournalAbsIntroRetrieval import *
 from .jpn.NLPJournalTitleAbsRetrieval import *
 from .jpn.NLPJournalTitleIntroRetrieval import *
 from .kat.GeorgianFAQRetrieval import *
-from .kor.KoStrategyQA import *
+from .kor.KoStrategyQA import * """
 from .multilingual.BelebeleRetrieval import *
-from .multilingual.CrossLingualSemanticDiscriminationWMT19 import *
-from .multilingual.CrossLingualSemanticDiscriminationWMT21 import *
-from .multilingual.IndicQARetrieval import *
-from .multilingual.MintakaRetrieval import *
+#from .multilingual.CrossLingualSemanticDiscriminationWMT19 import *
+#from .multilingual.CrossLingualSemanticDiscriminationWMT21 import *
+#from .multilingual.IndicQARetrieval import *
+#from .multilingual.MintakaRetrieval import *
 from .multilingual.MIRACLRetrieval import *
 from .multilingual.MLQARetrieval import *
 from .multilingual.MrTidyRetrieval import *
@@ -118,7 +118,7 @@ from .multilingual.WikipediaRetrievalMultilingual import *
 from .multilingual.XMarketRetrieval import *
 from .multilingual.XPQARetrieval import *
 from .multilingual.XQuADRetrieval import *
-from .nob.norquad import *
+""" from .nob.norquad import *
 from .nob.snl_retrieval import *
 from .pol.ArguAnaPLRetrieval import *
 from .pol.DBPediaPLRetrieval import *
@@ -143,3 +143,4 @@ from .tur.TurHistQuad import *
 from .vie.VieQuADRetrieval import *
 from .zho.CMTEBRetrieval import *
 from .zho.LeCaRDv2Retrieval import *
+ """

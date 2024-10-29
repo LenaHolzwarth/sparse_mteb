@@ -7,10 +7,10 @@ import subprocess
 from collections.abc import Sequence
 from pathlib import Path
 
-from mteb.abstasks.AbsTask import AbsTask
-from mteb.load_results.benchmark_results import BenchmarkResults, ModelResult
-from mteb.load_results.task_results import TaskResult
-from mteb.model_meta import ModelMeta
+from sparse_mteb.mteb.abstasks.AbsTask import AbsTask
+from sparse_mteb.mteb.load_results.benchmark_results import BenchmarkResults, ModelResult
+from sparse_mteb.mteb.load_results.task_results import TaskResult
+from sparse_mteb.mteb.model_meta import ModelMeta
 
 logger = logging.getLogger(__name__)
 MODEL_NAME = str

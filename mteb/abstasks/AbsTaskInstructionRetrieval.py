@@ -10,7 +10,7 @@ from typing import Any
 import tqdm
 from datasets import Dataset, Features, Value, load_dataset
 
-from mteb.encoder_interface import Encoder
+from sparse_mteb.mteb.encoder_interface import Encoder
 
 from ..evaluation.evaluators import utils
 from ..evaluation.evaluators.InstructionRetrievalEvaluator import (
