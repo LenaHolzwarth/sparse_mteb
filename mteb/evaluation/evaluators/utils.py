@@ -7,8 +7,10 @@ import pandas as pd
 import requests
 import torch
 import tqdm
+import re
 from packaging.version import Version
 from sklearn.metrics import auc
+from datasets import Dataset
 
 
 def cos_sim(a, b):
@@ -426,3 +428,21 @@ def nAUC(
         abst_nauc = (abst_auc - flat_auc) / (or_auc - flat_auc)
 
     return abst_nauc
+
+
+# helper function to extract vocab
+def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: bool = True) -> [str]:
+    """Return a list of unique words ocurring in text that fulfill the specified token_pattern
+    The default token_pattern is the one used in the scikit-learn TfidfVectorizer class
+    """
+    print("get_vocab called!")
+    print(f"input: {type(text)} of length {len(text)}")
+
+    if lowercase:
+        vocab = [word for sent in text for word in re.findall(token_pattern, sent.lower())]
+    else:
+        vocab = [word for sent in text for word in re.findall(token_pattern, sent)]
+    
+    vocab = list(set(vocab))
+    print(f"vocab of lenght {len(vocab)} starting with {vocab[:10]}")
+    return vocab

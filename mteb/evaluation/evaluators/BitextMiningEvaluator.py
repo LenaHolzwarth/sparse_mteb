@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 from mteb.encoder_interface import Encoder
 
 from .Evaluator import Evaluator
-from .utils import cos_sim
+from .utils import cos_sim, get_vocab
 
 logger = logging.getLogger(__name__)
 
@@ -37,17 +37,37 @@ class BitextMiningEvaluator(Evaluator):
             else sentences["gold"]
         )
         self.task_name = task_name
+        
 
     def __call__(self, model: Encoder, *, encode_kwargs: dict[str, Any] = {}):
         scores = self.compute_metrics(model, encode_kwargs=encode_kwargs)
         return scores
 
+    def get_vocab(self):
+        """wrapper function for utils.get_vocab() to deal with the data format"""
+        
+        pair_elements = {p for pair in self.pairs for p in pair}
+        subsets = [
+            col for col in self.sentences.features.keys() if col in pair_elements
+        ]
+
+        text = []
+        for sub in subsets:
+            text += self.sentences[sub]
+
+        # TODO: test this (but how?)
+
+        return get_vocab(text)
+    
     def compute_metrics(self, model: Encoder, encode_kwargs: dict[str, Any] = {}):
         pair_elements = {p for pair in self.pairs for p in pair}
         subsets = [
             col for col in self.sentences.features.keys() if col in pair_elements
         ]
         n_subsets = len(subsets)
+
+        # add vocab to encode_kwargs (todo: wrap in some if statement that tests model type)
+        encode_kwargs["vocab"] = self.get_vocab() # TODO: should only call get_vocab if it's necessary
 
         embeddings = {}
         for sub in tqdm.tqdm(subsets, desc=f"Encoding {n_subsets}x{self.n} sentences"):
@@ -181,3 +201,4 @@ class BitextMiningEvaluator(Evaluator):
             queries_result_list[idx] = queries_result_list[idx][0:top_k]
 
         return queries_result_list
+
