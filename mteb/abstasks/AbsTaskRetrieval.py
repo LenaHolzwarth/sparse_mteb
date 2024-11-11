@@ -15,6 +15,7 @@ from mteb.abstasks.TaskMetadata import HFSubset
 from ..evaluation.evaluators import RetrievalEvaluator
 from ..load_results.task_results import ScoresDict
 from .AbsTask import AbsTask, DescriptiveStatistics
+from ..evaluation.evaluators.utils import get_vocab
 
 logger = logging.getLogger(__name__)
 
@@ -270,12 +271,16 @@ class AbsTaskRetrieval(AbsTask):
         encode_kwargs: dict[str, Any] = {},
         **kwargs,
     ) -> dict[HFSubset, ScoresDict]:
-        retriever = RetrievalEvaluator(
+        
+        print("AbsTaskRetrieval.evaluate called")
+        
+        # original position of evaluator instantiation
+        """retriever = RetrievalEvaluator(
             retriever=model,
             task_name=self.metadata.name,
             encode_kwargs=encode_kwargs,
             **kwargs,
-        )
+        )"""
 
         scores = {}
         hf_subsets = list(self.hf_subsets) if self.is_multilingual else ["default"]
@@ -295,6 +300,25 @@ class AbsTaskRetrieval(AbsTask):
                     self.queries[hf_subset][split],
                     self.relevant_docs[hf_subset][split],
                 )
+
+            # moved the Evaluator instantiation in the loop, which works best for computing 
+            # vocab for queries & corpus at the same time
+            # (this means that for each language a new Evaluator model is defined)
+            print(f"corpus keys: {corpus.keys()}")
+            print(f"query keys: {queries.keys()}")
+            if type(corpus) == dict and type(queries) == dict:
+                vocab = list(corpus.values()) + list(queries.values())
+            else:
+                vocab = corpus + queries
+            encode_kwargs["vocab"] = get_vocab(vocab)
+
+            retriever = RetrievalEvaluator(
+                retriever=model,
+                task_name=self.metadata.name,
+                encode_kwargs=encode_kwargs,
+                **kwargs,
+            )
+            
             scores[hf_subset] = self._evaluate_subset(
                 retriever, corpus, queries, relevant_docs, hf_subset, **kwargs
             )

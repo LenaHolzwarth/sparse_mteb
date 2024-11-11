@@ -18,6 +18,8 @@ from mteb.abstasks.TaskMetadata import HFSubset, TaskMetadata
 from mteb.encoder_interface import Encoder
 from mteb.languages import LanguageScripts
 
+from ..evaluation.evaluators.utils import get_vocab
+
 logger = logging.getLogger(__name__)
 
 ScoresDict = dict[str, Any]
@@ -41,6 +43,8 @@ def _multilabel_subsampling(
         label: the label with which the stratified sampling is based on.
         n_samples: Optional, number of samples to subsample. Default is max_n_samples.
     """
+    print("multilabel subsampling in AbsTask.py called")
+    
     for split in splits:
         n_split = len(dataset_dict[split])
         X_np = np.arange(n_split).reshape((-1, 1))
@@ -76,6 +80,10 @@ class AbsTask(ABC):
         torch.manual_seed(self.seed)
         torch.cuda.manual_seed_all(self.seed)
 
+        # need to make vocab a class variable so that self.evaluate can access the 
+        # vocab computed by self.load_data, but this is only for clustering so let's hope this doesn't break anything
+        #self.vocab = []
+
     def check_if_dataset_is_superseeded(self):
         """Check if the dataset is superseeded by a newer version"""
         if self.superseded_by:
@@ -87,6 +95,7 @@ class AbsTask(ABC):
         """Transform operations applied to the dataset after loading.
         Override this method if your dataset requires any transformation.
         """
+        #print("AbsTask.dataset_transform called")
         pass
 
     def evaluate(
@@ -107,8 +116,12 @@ class AbsTask(ABC):
             encode_kwargs: Additional keyword arguments that are passed to the model's `encode` method.
             kwargs: Additional keyword arguments that are passed to the _evaluate_subset method.
         """
+        print("AbsTask.evaluate called in AbsTask.py")
         if not self.data_loaded:
             self.load_data()
+
+        # pass vocab to encode_kwargs, but probably only for clustering?
+        #encode_kwargs["vocab"] = self.vocab
 
         self.dataset: dict[HFSubset, DatasetDict]
 
@@ -116,6 +129,7 @@ class AbsTask(ABC):
         hf_subsets = list(self.dataset.keys()) if self.is_multilingual else ["default"]
 
         for hf_subset in hf_subsets:
+            print(self.dataset)
             logger.info(
                 f"\nTask: {self.metadata_dict['name']}, split: {split}, subset: {hf_subset}. Running..."
             )
@@ -158,6 +172,8 @@ class AbsTask(ABC):
             label: the label with which the stratified sampling is based on.
             n_samples: Optional, number of samples to subsample. Default is max_n_samples.
         """
+        print("AbsTask.stratified_subsampling called")
+        
         ## Can only do this if the label column is of ClassLabel.
         if not isinstance(dataset_dict[splits[0]].features[label], datasets.ClassLabel):
             try:
@@ -187,10 +203,26 @@ class AbsTask(ABC):
 
     def load_data(self, **kwargs):
         """Load dataset from HuggingFace hub"""
+        print("AbsTask.load_data called")
         if self.data_loaded:
             return
         self.dataset = datasets.load_dataset(**self.metadata_dict["dataset"])  # type: ignore
+        
+        
+        print(f"dataset before transform: {self.dataset}")
+        print(f"dataset keys: {self.dataset.keys()}")
+        print(f"dataset['test']: {self.dataset["test"]}")
+        #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
+        #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
+        print(f"self.metadata_dict: {self.metadata_dict}")
+        
+        # here we compute the vocab and pray
+        #self.vocab = get_vocab(self.dataset["test"]["sentences"])
+        
         self.dataset_transform()
+        print(f"dataset after transform: {self.dataset}")
+        #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
+        #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
         self.data_loaded = True
 
     def calculate_metadata_metrics(

@@ -34,6 +34,8 @@ class ClusteringEvaluator(Evaluator):
         self.task_name = task_name
 
     def __call__(self, model: Encoder, *, encode_kwargs: dict[str, Any] = {}):
+        print("ClusteringEvaluator called")
+        
         if "batch_size" not in encode_kwargs:
             encode_kwargs["batch_size"] = 32
 

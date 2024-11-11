@@ -18,6 +18,8 @@ from mteb.encoder_interface import Encoder
 
 from .Evaluator import Evaluator
 
+from .utils import get_vocab
+
 logger = logging.getLogger(__name__)
 
 
@@ -57,11 +59,18 @@ class kNNClassificationEvaluator(Evaluator):
 
         self.k = k
 
+        # add vocab to encode_kwargs (todo: wrap in some if statement that tests model type)
+        #self.encode_kwargs["vocab"] = get_vocab(self.sentences_train + self.sentences_test) # TODO: should only call get_vocab if it's necessary
+
+
     def __call__(self, model, test_cache=None):
         scores = {}
         max_accuracy = 0
         max_f1 = 0
         max_ap = 0
+
+        print("kNNClassificationEvaluator called")
+
         X_train = model.encode(
             self.sentences_train,
             task_name=self.task_name,
@@ -131,11 +140,18 @@ class kNNClassificationEvaluatorPytorch(Evaluator):
 
         self.k = k
 
+        # add vocab to encode_kwargs (todo: wrap in some if statement that tests model type)
+        #self.encode_kwargs["vocab"] = get_vocab(self.sentences_train + self.sentences_test) # TODO: should only call get_vocab if it's necessary
+
+
     def __call__(self, model: Encoder, test_cache=None):
         scores = {}
         max_accuracy = 0
         max_f1 = 0
         max_ap = 0
+
+        print("kNNClassificationEvaluatorPytorch called")
+        
         X_train = model.encode(
             self.sentences_train,
             task_name=self.task_name,
@@ -280,8 +296,15 @@ class logRegClassificationEvaluator(Evaluator):
         self.max_iter = max_iter
         self.task_name = task_name
 
+        # add vocab to encode_kwargs (todo: wrap in some if statement that tests model type)
+        #self.encode_kwargs["vocab"] = get_vocab(self.sentences_train + self.sentences_test) # TODO: should only call get_vocab if it's necessary
+
     def __call__(self, model, test_cache=None):
         scores = {}
+
+        print("logRegClassificationEvaluator called")
+        
+
         clf = LogisticRegression(
             random_state=self.seed,
             n_jobs=-1,

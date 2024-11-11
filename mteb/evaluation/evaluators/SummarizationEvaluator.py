@@ -12,7 +12,7 @@ from scipy.stats import pearsonr, spearmanr
 from mteb.encoder_interface import Encoder, EncoderWithSimilarity
 
 from .Evaluator import Evaluator
-from .utils import cos_sim, dot_score
+from .utils import cos_sim, dot_score, get_vocab
 
 # if later than python 3.13 use typing module
 if sys.version_info >= (3, 13):
@@ -20,7 +20,7 @@ if sys.version_info >= (3, 13):
 else:
     from typing_extensions import deprecated
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name__) 
 
 
 class SummarizationEvaluator(Evaluator):
@@ -56,6 +56,8 @@ class SummarizationEvaluator(Evaluator):
         *,
         encode_kwargs: dict[str, Any] = {},
     ):
+        print("SummarizationEvaluator called ")
+        
         # set default for encode_kwargs
         if "batch_size" not in encode_kwargs:
             encode_kwargs["batch_size"] = 32
@@ -72,6 +74,10 @@ class SummarizationEvaluator(Evaluator):
         machine_lens = [
             len(machine_summaries) for machine_summaries in self.machine_summaries
         ]
+
+        # get vocab for all summaries
+        vocab = self.human_summaries + self.machine_summaries
+        encode_kwargs["vocab"] = get_vocab(vocab)
 
         logger.info("Encoding human summaries...")
         embs_human_summaries_all = model.encode(
@@ -215,6 +221,8 @@ class DeprecatedSummarizationEvaluator(Evaluator):
         *,
         encode_kwargs: dict[str, Any] = {},
     ):
+        print("DeprecatedSummarizationEvaluator called in SummarizationEvaluator.py")
+
         # set default for encode_kwargs
         if "batch_size" not in encode_kwargs:
             encode_kwargs["batch_size"] = 32
@@ -231,6 +239,11 @@ class DeprecatedSummarizationEvaluator(Evaluator):
         machine_lens = [
             len(machine_summaries) for machine_summaries in self.machine_summaries
         ]
+
+        # get vocab for all summaries
+        vocab = self.human_summaries + self.machine_summaries
+        encode_kwargs["vocab"] = get_vocab(vocab)
+
 
         logger.info("Encoding human summaries...")
         embs_human_summaries_all = model.encode(

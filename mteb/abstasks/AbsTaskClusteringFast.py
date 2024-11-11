@@ -16,6 +16,7 @@ from mteb.encoder_interface import Encoder
 
 from ..load_results.task_results import HFSubset
 from .AbsTask import AbsTask, DescriptiveStatistics
+from ..evaluation.evaluators.utils import get_vocab
 
 logger = logging.getLogger(__name__)
 
@@ -146,6 +147,13 @@ class AbsTaskClusteringFast(AbsTask):
     ) -> dict[str, float | dict[str, list[float]]]:
         rng_state = random.Random(self.seed)
 
+        print("_evaluate_subset in AbsTaskClusteringFast called")
+        print(f"len(dataset['sentences']): {len(dataset["sentences"])}")
+        #print(dataset["sentences"][0])
+        #compute vocab (moved to AbsTask.load_data, before the dataset is reduced)
+        #encode_kwargs["vocab"] = get_vocab(dataset["sentences"])
+
+
         if (
             self.max_document_to_embed is not None
             and self.max_fraction_of_documents_to_embed is not None
@@ -251,6 +259,8 @@ def clustering_downsample(
 
     This might be necessary when the clusters in the dataset is not sampled from the same distribution.
     """
+    print("clustering_downsample in AbsTastClusteringFast.py called")
+    
     rng_state = random.Random(seed)
 
     ds = {}
@@ -281,6 +291,7 @@ def convert_to_fast(
     """Converts a clustering dataset to a fast version. This concats the cluster into two columns, sentences and labels.
     It additionally downsamples the dataset to max_size.
     """
+    print("convert_to_fast in AbsTastClusteringFast.py called")
     rng_state = random.Random(seed)
 
     ds = {}

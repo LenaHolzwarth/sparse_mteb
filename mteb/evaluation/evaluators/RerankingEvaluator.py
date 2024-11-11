@@ -12,7 +12,7 @@ from mteb.evaluation.evaluators.RetrievalEvaluator import RetrievalEvaluator
 
 from ...encoder_interface import Encoder, PromptType
 from .Evaluator import Evaluator
-from .utils import confidence_scores, cos_sim, nAUC
+from .utils import confidence_scores, cos_sim, nAUC, get_vocab
 
 logger = logging.getLogger(__name__)
 
@@ -67,6 +67,10 @@ class RerankingEvaluator(Evaluator):
             for sample in self.samples
             if len(sample["positive"]) > 0 and len(sample["negative"]) > 0
         ]
+
+        # get vocab
+        vocab = [list(sample["query"]) + sample["positive"] + sample["negative"] for sample in self.samples]
+        self.encode_kwargs["vocab"] = get_vocab(vocab)
 
     def __call__(self, model: Encoder):
         scores = self.compute_metrics(model)

@@ -436,6 +436,11 @@ def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: boo
     The default token_pattern is the one used in the scikit-learn TfidfVectorizer class
     """
     print("get_vocab called!")
+
+    #flatten if necessary
+    if type(text[0]) == list:
+        text = [t for s in text for t in s]
+
     print(f"input: {type(text)} of length {len(text)}")
 
     if lowercase:

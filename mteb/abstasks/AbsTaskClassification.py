@@ -14,6 +14,8 @@ from ..evaluation.evaluators import (
     kNNClassificationEvaluatorPytorch,
     logRegClassificationEvaluator,
 )
+
+from ..evaluation.evaluators.utils import get_vocab
 from ..load_results.task_results import HFSubset, ScoresDict
 from .AbsTask import AbsTask, DescriptiveStatistics
 
@@ -87,6 +89,8 @@ class AbsTaskClassification(AbsTask):
         if not self.data_loaded:
             self.load_data()
 
+        print(f"dataset keys (called in abstaskclassification) {self.dataset.keys()}")
+
         scores = {}
         hf_subsets = list(self.dataset) if self.is_multilingual else ["default"]
 
@@ -124,6 +128,12 @@ class AbsTaskClassification(AbsTask):
         eval_split = dataset[eval_split]
         params = {"k": self.k}
         params.update(kwargs)
+
+        # compute vocab of train and test split 
+        # the position of this means that the vocabulary is computed for each language separately
+        # because evaluate_subset passes each language separately to _evaluate_subset
+        print(f"train_split is of type {type(train_split["text"])}")
+        encode_kwargs["vocab"] = get_vocab(train_split["text"] + eval_split["text"])
 
         scores = []
         test_cache, idxs = (

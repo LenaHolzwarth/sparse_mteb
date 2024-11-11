@@ -14,6 +14,8 @@ from mteb.load_results.task_results import ScoresDict
 from ..evaluation.evaluators import ClusteringEvaluator
 from .AbsTask import AbsTask, DescriptiveStatistics
 
+from ..evaluation.evaluators.utils import get_vocab
+
 logger = logging.getLogger(__name__)
 
 
@@ -58,8 +60,19 @@ class AbsTaskClustering(AbsTask):
         encode_kwargs: dict[str, Any] = {},
         **kwargs,
     ) -> ScoresDict:
+        
+        print("_evaluate_subset in AbsTaskClustering called")
+
+        # compute vocab of the entire set
+        vocab = []
+        for cluster_set in dataset:
+            vocab += cluster_set["sentences"]
+        encode_kwargs["vocab"] = get_vocab(vocab)
+        
         v_measures = []
+
         for cluster_set in tqdm.tqdm(dataset, desc="Clustering"):
+            print(f"cluster set of type {type(cluster_set)}")
             evaluator = ClusteringEvaluator(
                 cluster_set["sentences"],  # type: ignore
                 cluster_set["labels"],  # type: ignore

@@ -15,6 +15,8 @@ from mteb.encoder_interface import Encoder, EncoderWithSimilarity
 
 from .Evaluator import Evaluator
 
+from .utils import get_vocab
+
 logger = logging.getLogger(__name__)
 
 
@@ -44,6 +46,11 @@ class STSEvaluator(Evaluator):
         *,
         encode_kwargs: dict[str, Any] = {},
     ):
+        
+        # compute joint vocab
+        vocab = self.sentences1 + self.sentences2
+        encode_kwargs["vocab"] = get_vocab(vocab)
+        
         embeddings1 = model.encode(
             self.sentences1,
             task_name=self.task_name,
