@@ -124,6 +124,7 @@ class AbsTaskClassification(AbsTask):
         encode_kwargs: dict[str, Any] = {},
         **kwargs,
     ) -> ScoresDict:
+        
         train_split = dataset[train_split]
         eval_split = dataset[eval_split]
         params = {"k": self.k}
@@ -132,8 +133,12 @@ class AbsTaskClassification(AbsTask):
         # compute vocab of train and test split 
         # the position of this means that the vocabulary is computed for each language separately
         # because evaluate_subset passes each language separately to _evaluate_subset
-        print(f"train_split is of type {type(train_split["text"])}")
-        encode_kwargs["vocab"] = get_vocab(train_split["text"] + eval_split["text"])
+        print(f"dataset keys: {dataset.keys()}")
+        vocab = []
+        for split in dataset:
+            vocab += dataset[split]["text"]
+
+        encode_kwargs["vocab"] = get_vocab(vocab)
 
         scores = []
         test_cache, idxs = (
