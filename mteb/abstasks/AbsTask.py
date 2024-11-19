@@ -211,7 +211,7 @@ class AbsTask(ABC):
         
         print(f"dataset before transform: {self.dataset}")
         print(f"dataset keys: {self.dataset.keys()}")
-        print(f"dataset['test']: {self.dataset["test"]}")
+        print(f"dataset['test']: {self.dataset['test']}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
         #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
         print(f"self.metadata_dict: {self.metadata_dict}")

@@ -436,6 +436,8 @@ class RerankingEvaluator(Evaluator):
         logger.warning(
             f"A total on {len(all_texts) - len(all_unique_texts)}/{len(all_texts)} duplicate texts were found during encoding. Only encoding unique text and duplicating embeddings across."
         )
+        # pass number of all texts to model, s.t. the resulting embedding can be reduced via svd if too large
+        encode_kwargs["n_documents"] = len(all_texts)
         all_unique_texts_embs = np.asarray(
             model.encode(
                 all_unique_texts,
