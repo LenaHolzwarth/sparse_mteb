@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import logging
 from typing import Any
+import numpy as np
 
 from ..evaluation.evaluators import STSEvaluator
+from ..evaluation.evaluators.utils import get_vocab
 from ..load_results.task_results import ScoresDict
 from .AbsTask import AbsTask, DescriptiveStatistics
 
@@ -51,6 +53,21 @@ class AbsTaskSTS(AbsTask):
     ) -> ScoresDict:
         def normalize(x):
             return (x - self.min_score) / (self.max_score - self.min_score)
+        
+        if model.model.mteb_model_meta.name == "Tfidf":
+            # compute vocab
+            vocab = data_split["sentence1"] + data_split["sentence2"]
+            encode_kwargs["vocab"] = get_vocab(vocab)
+
+            # check if this is a tfidf_svd model
+            rev = model.model.mteb_model_meta.revision
+            if "svd" in rev and not rev == "svd_log_old":
+                # make sure that encode_kwargs["V"] is empty
+                encode_kwargs["V"] = np.array([])
+                # get the svd components for the entire data
+                v = model.encode(vocab, task_name=self.metadata.name,
+                    **encode_kwargs)
+                encode_kwargs["V"] = v
 
         normalized_scores = list(map(normalize, data_split["score"]))
         evaluator = STSEvaluator(

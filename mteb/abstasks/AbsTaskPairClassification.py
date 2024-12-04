@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import numpy as np
 from collections import Counter, defaultdict
 
 from datasets import Dataset
@@ -9,6 +10,7 @@ from ..encoder_interface import Encoder
 from ..evaluation.evaluators import PairClassificationEvaluator
 from ..load_results.task_results import ScoresDict
 from .AbsTask import AbsTask, DescriptiveStatistics
+from ..evaluation.evaluators.utils import get_vocab
 
 logger = logging.getLogger(__name__)
 
@@ -60,6 +62,21 @@ class AbsTaskPairClassification(AbsTask):
         logging.getLogger(
             "sentence_transformers.evaluation.PairClassificationEvaluator"
         ).setLevel(logging.WARN)
+
+        # check if this is a tfidf_svd model
+        rev = model.model.mteb_model_meta.revision
+        if "svd" in rev and not rev == "svd_log_old":
+            # need to get vocab (only for svd_tfidf)
+            vocab = data_split["sentence1"] + data_split["sentence2"]
+            encode_kwargs["vocab"] = get_vocab(vocab)
+
+            # make sure that encode_kwargs["V"] is empty
+            encode_kwargs["V"] = np.array([])
+            # get the svd components for the entire data
+            v = model.encode(vocab, task_name=self.metadata.name,
+                    **encode_kwargs)
+            encode_kwargs["V"] = v 
+        
         evaluator = PairClassificationEvaluator(
             data_split["sentence1"],
             data_split["sentence2"],

@@ -438,16 +438,19 @@ def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: boo
     print("get_vocab called!")
 
     #flatten if necessary
-    if type(text[0]) == list:
+    while type(text[0]) == list:
         text = [t for s in text for t in s]
 
     print(f"input: {type(text)} of length {len(text)}")
 
     if lowercase:
-        vocab = [word for sent in text for word in re.findall(token_pattern, sent.lower())]
+        vocab = [word.casefold() for sent in text for word in re.findall(token_pattern, sent)]
+        # this seems redundant, but str.islower() sees numbers as not lowercase, which leads to problems down the line
+        vocab = [word for word in vocab if word.islower()]
     else:
         vocab = [word for sent in text for word in re.findall(token_pattern, sent)]
     
-    vocab = list(set(vocab))
+    vocab = sorted(set(vocab))
+    
     print(f"vocab of lenght {len(vocab)} starting with {vocab[:10]}")
     return vocab

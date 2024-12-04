@@ -209,18 +209,18 @@ class AbsTask(ABC):
         self.dataset = datasets.load_dataset(**self.metadata_dict["dataset"])  # type: ignore
         
         
-        print(f"dataset before transform: {self.dataset}")
-        print(f"dataset keys: {self.dataset.keys()}")
-        print(f"dataset['test']: {self.dataset['test']}")
+        #print(f"dataset before transform: {self.dataset}")
+        #print(f"dataset keys: {self.dataset.keys()}")
+        #print(f"dataset['test']: {self.dataset['test']}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
         #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
-        print(f"self.metadata_dict: {self.metadata_dict}")
+        #print(f"self.metadata_dict: {self.metadata_dict}")
         
         # here we compute the vocab and pray
         #self.vocab = get_vocab(self.dataset["test"]["sentences"])
         
         self.dataset_transform()
-        print(f"dataset after transform: {self.dataset}")
+        #print(f"dataset after transform: {self.dataset}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
         #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
         self.data_loaded = True

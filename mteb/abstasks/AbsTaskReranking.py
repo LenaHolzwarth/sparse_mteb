@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import Any
+import numpy as np
 
 from datasets import Dataset
 
@@ -8,6 +9,7 @@ from mteb.encoder_interface import Encoder
 from mteb.load_results.task_results import ScoresDict
 
 from ..evaluation.evaluators import RerankingEvaluator
+from ..evaluation.evaluators.utils import get_vocab
 from .AbsTask import AbsTask, DescriptiveStatistics
 
 
@@ -51,6 +53,28 @@ class AbsTaskReranking(AbsTask):
         encode_kwargs: dict[str, Any] = {},
         **kwargs: Any,
     ) -> ScoresDict:
+        print("evaluate subset called in abstaskreranking")
+        if model.model.mteb_model_meta.name == "Tfidf":
+            # get vocab
+            vocab = []
+            for split in data_split:
+                vocab += list(split["query"]) + split["positive"] + split["negative"] 
+            
+            encode_kwargs["vocab"] = get_vocab(vocab)
+
+            # check if this is a tfidf_svd model
+            rev = model.model.mteb_model_meta.revision
+            if "svd" in rev and not rev == "svd_log_old":
+                # make sure that encode_kwargs["V"] is empty
+                encode_kwargs["V"] = np.array([])
+
+                # get the svd components for the entire data
+                v = model.encode(vocab, task_name=self.metadata.name,
+                    **encode_kwargs)
+                encode_kwargs["V"] = v
+            
+                
+
         evaluator = RerankingEvaluator(
             data_split,
             task_name=self.metadata.name,

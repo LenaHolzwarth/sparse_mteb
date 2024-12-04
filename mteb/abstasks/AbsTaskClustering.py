@@ -63,11 +63,22 @@ class AbsTaskClustering(AbsTask):
         
         print("_evaluate_subset in AbsTaskClustering called")
 
-        # compute vocab of the entire set
-        vocab = []
-        for cluster_set in dataset:
-            vocab += cluster_set["sentences"]
-        encode_kwargs["vocab"] = get_vocab(vocab)
+        if model.model.mteb_model_meta.name == "Tfidf":
+            # compute vocab of the entire set
+            vocab = []
+            for cluster_set in dataset:
+                vocab += cluster_set["sentences"]
+            encode_kwargs["vocab"] = get_vocab(vocab)
+
+            # check if this is a tfidf_svd model
+            rev = model.model.mteb_model_meta.revision
+            if "svd" in rev and not rev == "svd_log_old":
+                # make sure that encode_kwargs["V"] is empty
+                encode_kwargs["V"] = np.array([])
+                # get the svd components for the entire data
+                v = model.encode(vocab, task_name=self.metadata.name,
+                    **encode_kwargs)
+                encode_kwargs["V"] = v
         
         v_measures = []
 

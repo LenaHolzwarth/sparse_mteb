@@ -7,6 +7,7 @@ from collections import defaultdict
 from pathlib import Path
 from time import time
 from typing import Any
+import numpy as np
 
 from datasets import Features, Value, load_dataset
 
@@ -304,13 +305,26 @@ class AbsTaskRetrieval(AbsTask):
             # moved the Evaluator instantiation in the loop, which works best for computing 
             # vocab for queries & corpus at the same time
             # (this means that for each language a new Evaluator model is defined)
-            print(f"corpus keys: {corpus.keys()}")
-            print(f"query keys: {queries.keys()}")
-            if type(corpus) == dict and type(queries) == dict:
-                vocab = list(corpus.values()) + list(queries.values())
-            else:
-                vocab = corpus + queries
-            encode_kwargs["vocab"] = get_vocab(vocab)
+            #print(f"corpus keys: {corpus.keys()}")
+            #print(f"query keys: {queries.keys()}")
+
+            if model.model.mteb_model_meta.name == "Tfidf":
+                # get vocab
+                if type(corpus) == dict and type(queries) == dict:
+                    vocab = list(corpus.values()) + list(queries.values())
+                else:
+                    vocab = corpus + queries
+                encode_kwargs["vocab"] = get_vocab(vocab)
+
+                # check if this is a tfidf_svd model
+                rev = model.model.mteb_model_meta.revision
+                if "svd" in rev and not rev == "svd_log_old":
+                    # make sure that encode_kwargs["V"] is empty
+                    encode_kwargs["V"] = np.array([])
+                    # get the svd components for the entire data
+                    v = model.encode(vocab, task_name=self.metadata.name,
+                        **encode_kwargs)
+                    encode_kwargs["V"] = v
 
             retriever = RetrievalEvaluator(
                 retriever=model,

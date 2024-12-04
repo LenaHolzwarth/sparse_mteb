@@ -47,9 +47,9 @@ class STSEvaluator(Evaluator):
         encode_kwargs: dict[str, Any] = {},
     ):
         
-        # compute joint vocab
-        vocab = self.sentences1 + self.sentences2
-        encode_kwargs["vocab"] = get_vocab(vocab)
+        # compute joint vocab (moved to AbsTaskSTS for consistency)
+        #vocab = self.sentences1 + self.sentences2
+        #encode_kwargs["vocab"] = get_vocab(vocab)
         
         embeddings1 = model.encode(
             self.sentences1,

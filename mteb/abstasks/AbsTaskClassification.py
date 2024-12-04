@@ -130,15 +130,26 @@ class AbsTaskClassification(AbsTask):
         params = {"k": self.k}
         params.update(kwargs)
 
-        # compute vocab of train and test split 
-        # the position of this means that the vocabulary is computed for each language separately
-        # because evaluate_subset passes each language separately to _evaluate_subset
-        print(f"dataset keys: {dataset.keys()}")
-        vocab = []
-        for split in dataset:
-            vocab += dataset[split]["text"]
+        if model.model.mteb_model_meta.name == "Tfidf":
+            # compute vocab of train and test split 
+            # the position of this means that the vocabulary is computed for each language separately
+            # because evaluate_subset passes each language separately to _evaluate_subset
+            print(f"dataset keys: {dataset.keys()}")
+            vocab = []
+            for split in dataset:
+                vocab += dataset[split]["text"]
 
-        encode_kwargs["vocab"] = get_vocab(vocab)
+            encode_kwargs["vocab"] = get_vocab(vocab)
+
+            # check if this is a tfidf_svd model
+            rev = model.model.mteb_model_meta.revision
+            if "svd" in rev and not rev == "svd_log_old":
+                # make sure that encode_kwargs["V"] is empty
+                encode_kwargs["V"] = np.array([])
+                # get the svd components for the entire data
+                v = model.encode(vocab, task_name=self.metadata.name,
+                    **encode_kwargs)
+                encode_kwargs["V"] = v
 
         scores = []
         test_cache, idxs = (
