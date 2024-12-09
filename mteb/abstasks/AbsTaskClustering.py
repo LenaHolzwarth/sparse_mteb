@@ -76,7 +76,13 @@ class AbsTaskClustering(AbsTask):
                 # make sure that encode_kwargs["V"] is empty
                 encode_kwargs["V"] = np.array([])
                 # get the svd components for the entire data
-                v = model.encode(vocab, task_name=self.metadata.name,
+                if "piecewise" in rev:
+                    # pass dataset to keep information on batches
+                    v = model.encode(dataset, task_name=self.metadata.name,
+                    **encode_kwargs)
+                else:
+                    # pass flattened dataset
+                    v = model.encode(vocab, task_name=self.metadata.name,
                     **encode_kwargs)
                 encode_kwargs["V"] = v
         
