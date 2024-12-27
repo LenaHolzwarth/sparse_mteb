@@ -10,6 +10,7 @@ import tqdm
 import re
 from packaging.version import Version
 from sklearn.metrics import auc
+from sklearn.feature_extraction.text import TfidfVectorizer
 from datasets import Dataset
 
 
@@ -431,18 +432,24 @@ def nAUC(
 
 
 # helper function to extract vocab
-def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: bool = True) -> [str]:
+def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: bool = True,
+              ngram_range = (1, 1), max_df = 1.0, min_df = 1, max_features = None,) -> [str]:
     """Return a list of unique words ocurring in text that fulfill the specified token_pattern
     The default token_pattern is the one used in the scikit-learn TfidfVectorizer class
     """
     print("get_vocab called!")
 
+    
     #flatten if necessary
     while type(text[0]) == list:
         text = [t for s in text for t in s]
 
-    print(f"input: {type(text)} of length {len(text)}")
+    n = len(text)
 
+    print(f"input: {type(text)} of length {n}")
+    print(f"vocab settings: \nngram_range: {ngram_range}, \nmax_df: {max_df}, \nmin_df: {min_df}, \nmax_features: {max_features}")
+
+    """
     if lowercase:
         vocab = [word.casefold() for sent in text for word in re.findall(token_pattern, sent)]
         # this seems redundant, but str.islower() sees numbers as not lowercase, which leads to problems down the line
@@ -451,6 +458,13 @@ def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: boo
         vocab = [word for sent in text for word in re.findall(token_pattern, sent)]
     
     vocab = sorted(set(vocab))
-    
+    """
+    vectorizer = TfidfVectorizer(lowercase=lowercase, token_pattern=token_pattern,
+                                 ngram_range=ngram_range, max_df=max_df, 
+                                 min_df=min_df, max_features=max_features)
+    # fit on data
+    vectorizer_fit = vectorizer.fit(text)
+    vocab = list(vectorizer_fit.vocabulary_.keys())
+
     print(f"vocab of lenght {len(vocab)} starting with {vocab[:10]}")
     return vocab

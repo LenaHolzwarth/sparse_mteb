@@ -68,7 +68,11 @@ class AbsTaskPairClassification(AbsTask):
         if "svd" in rev and not rev == "svd_log_old":
             # need to get vocab (only for svd_tfidf)
             vocab = data_split["sentence1"] + data_split["sentence2"]
-            encode_kwargs["vocab"] = get_vocab(vocab)
+            encode_kwargs["vocab"] = get_vocab(vocab, 
+                                               ngram_range=encode_kwargs["ngram_range"],
+                                               max_df=encode_kwargs["max_df"],
+                                               min_df=encode_kwargs["min_df"],
+                                               max_features=encode_kwargs["max_features"])
 
             # make sure that encode_kwargs["V"] is empty
             encode_kwargs["V"] = np.array([])

@@ -68,7 +68,11 @@ class AbsTaskClustering(AbsTask):
             vocab = []
             for cluster_set in dataset:
                 vocab += cluster_set["sentences"]
-            encode_kwargs["vocab"] = get_vocab(vocab)
+            encode_kwargs["vocab"] = get_vocab(vocab, 
+                                               ngram_range=encode_kwargs["ngram_range"],
+                                               max_df=encode_kwargs["max_df"],
+                                               min_df=encode_kwargs["min_df"],
+                                               max_features=encode_kwargs["max_features"])
 
             # check if this is a tfidf_svd model
             rev = model.model.mteb_model_meta.revision
