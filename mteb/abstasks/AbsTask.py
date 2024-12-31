@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from typing import Any, TypedDict
 
 import datasets
-import numpy as np
+import numpy as np 
 import torch
 import tqdm
 from datasets import Dataset, DatasetDict
@@ -125,11 +125,13 @@ class AbsTask(ABC):
 
         self.dataset: dict[HFSubset, DatasetDict]
 
+        #print(self.dataset)
+
         scores = {}
         hf_subsets = list(self.dataset.keys()) if self.is_multilingual else ["default"]
 
         for hf_subset in hf_subsets:
-            print(self.dataset)
+            
             logger.info(
                 f"\nTask: {self.metadata_dict['name']}, split: {split}, subset: {hf_subset}. Running..."
             )
@@ -209,7 +211,12 @@ class AbsTask(ABC):
         self.dataset = datasets.load_dataset(**self.metadata_dict["dataset"])  # type: ignore
         
         
-        #print(f"dataset before transform: {self.dataset}")
+        print(f"dataset before transform: {self.dataset}")
+        temp = self.dataset["test"]["labels"]
+        while type(temp[0]) == list:
+            temp = [t for s in temp for t in s]
+        print(f"number of samples: {len(temp)}")
+
         #print(f"dataset keys: {self.dataset.keys()}")
         #print(f"dataset['test']: {self.dataset['test']}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
@@ -220,7 +227,11 @@ class AbsTask(ABC):
         #self.vocab = get_vocab(self.dataset["test"]["sentences"])
         
         self.dataset_transform()
-        #print(f"dataset after transform: {self.dataset}")
+        print(f"dataset after transform: {self.dataset}")
+        temp = self.dataset["test"]["labels"]
+        while type(temp[0]) == list:
+            temp = [t for s in temp for t in s]
+        print(f"number of samples: {len(temp)}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
         #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
         self.data_loaded = True

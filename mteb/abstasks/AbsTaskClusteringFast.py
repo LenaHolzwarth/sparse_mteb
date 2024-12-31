@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 MultilingualDataset = dict[HFSubset, DatasetDict]
 
-
+ 
 def evaluate_clustering_bootstrapped(
     embeddings: np.ndarray,
     labels: list[list[str]],
@@ -38,6 +38,8 @@ def evaluate_clustering_bootstrapped(
     The bootstrapping is done by sampling N samples from the corpus and clustering them. It is done without replacement to get a diverse set of
     samples.
     """
+    print("evaluate_clustering_bootstrapped() called")
+    print(f"{n_clusters} repetitions of sampling {cluster_size} samples")
     n_embeddings = embeddings.shape[0]
 
     v_measures = defaultdict(list)
@@ -180,7 +182,10 @@ class AbsTaskClusteringFast(AbsTask):
                 range(len(dataset)), k=max_documents_to_embed
             )
             downsampled_dataset = dataset.select(example_indices)  # type: ignore
-
+        temp = downsampled_dataset["labels"]
+        while type(temp[0]) == list:
+            temp = [t for s in temp for t in s]
+        print(f"number of samples in downsampled dataset: {len(temp)}")
         embeddings = model.encode(
             downsampled_dataset["sentences"],  # type: ignore
             task_name=self.metadata.name,

@@ -27,7 +27,7 @@ class ClusteringEvaluator(Evaluator):
         super().__init__(**kwargs)
         if limit is not None:
             sentences = sentences[:limit]
-            labels = labels[:limit]
+            labels = labels[:limit] 
         self.sentences = sentences
         self.labels = labels
         self.clustering_batch_size = clustering_batch_size

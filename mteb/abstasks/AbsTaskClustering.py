@@ -7,6 +7,7 @@ from typing import Any
 import numpy as np
 import tqdm
 from datasets import Dataset
+from sentence_transformers import SentenceTransformer
 
 from mteb.encoder_interface import Encoder
 from mteb.load_results.task_results import ScoresDict
@@ -63,7 +64,10 @@ class AbsTaskClustering(AbsTask):
         
         print("_evaluate_subset in AbsTaskClustering called")
 
-        if model.model.mteb_model_meta.name == "Tfidf":
+        print(type(model.model))
+
+        #if model.model.mteb_model_meta.name == "Tfidf":
+        if not type(model.model) == SentenceTransformer:
             # compute vocab of the entire set
             vocab = []
             for cluster_set in dataset:
@@ -100,7 +104,7 @@ class AbsTaskClustering(AbsTask):
                 task_name=self.metadata.name,
                 **kwargs,
             )
-            metrics = evaluator(model, encode_kwargs=encode_kwargs)
+            metrics = evaluator(model, encode_kwargs=encode_kwargs) 
             v_measures.append(metrics["v_measure"])
 
         v_mean = np.mean(v_measures)

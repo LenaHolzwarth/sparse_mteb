@@ -464,7 +464,8 @@ def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: boo
                                  min_df=min_df, max_features=max_features)
     # fit on data
     vectorizer_fit = vectorizer.fit(text)
-    vocab = list(vectorizer_fit.vocabulary_.keys())
-
+    # this only returns vocab list
+    vocab = sorted(list(vectorizer_fit.vocabulary_.keys()))
     print(f"vocab of lenght {len(vocab)} starting with {vocab[:10]}")
+
     return vocab
