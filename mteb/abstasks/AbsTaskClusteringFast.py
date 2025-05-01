@@ -149,8 +149,8 @@ class AbsTaskClusteringFast(AbsTask):
     ) -> dict[str, float | dict[str, list[float]]]:
         rng_state = random.Random(self.seed)
 
-        print("_evaluate_subset in AbsTaskClusteringFast called")
-        print(f"len(dataset['sentences']): {len(dataset['sentences'])}")
+        #print("_evaluate_subset in AbsTaskClusteringFast called")
+        #print(f"len(dataset['sentences']): {len(dataset['sentences'])}")
         #print(dataset["sentences"][0])
         #compute vocab (moved to AbsTask.load_data, before the dataset is reduced)
         #encode_kwargs["vocab"] = get_vocab(dataset["sentences"])

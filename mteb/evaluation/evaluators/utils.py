@@ -449,6 +449,7 @@ def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: boo
     print(f"input: {type(text)} of length {n}")
     print(f"vocab settings: \nngram_range: {ngram_range}, \nmax_df: {max_df}, \nmin_df: {min_df}, \nmax_features: {max_features}")
 
+    # this is the custom vocab function that was used in earlier stages of the experiments
     """
     if lowercase:
         vocab = [word.casefold() for sent in text for word in re.findall(token_pattern, sent)]
@@ -459,6 +460,7 @@ def get_vocab(text: [str], token_pattern: str = r"(?u)\b\w\w+\b", lowercase: boo
     
     vocab = sorted(set(vocab))
     """
+    # now, we use the sklearn TF-IDF implementation to get the vocab
     vectorizer = TfidfVectorizer(lowercase=lowercase, token_pattern=token_pattern,
                                  ngram_range=ngram_range, max_df=max_df, 
                                  min_df=min_df, max_features=max_features)

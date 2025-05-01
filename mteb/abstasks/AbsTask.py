@@ -81,7 +81,7 @@ class AbsTask(ABC):
         torch.cuda.manual_seed_all(self.seed)
 
         # need to make vocab a class variable so that self.evaluate can access the 
-        # vocab computed by self.load_data, but this is only for clustering so let's hope this doesn't break anything
+        # vocab computed by self.load_data, but this is only for hierarchical clustering 
         #self.vocab = []
 
     def check_if_dataset_is_superseeded(self):
@@ -116,11 +116,11 @@ class AbsTask(ABC):
             encode_kwargs: Additional keyword arguments that are passed to the model's `encode` method.
             kwargs: Additional keyword arguments that are passed to the _evaluate_subset method.
         """
-        print("AbsTask.evaluate called in AbsTask.py")
+        #print("AbsTask.evaluate called in AbsTask.py")
         if not self.data_loaded:
             self.load_data()
 
-        # pass vocab to encode_kwargs, but probably only for clustering?
+        # pass vocab to encode_kwargs, but only for hierarchical clustering
         #encode_kwargs["vocab"] = self.vocab
 
         self.dataset: dict[HFSubset, DatasetDict]
@@ -205,33 +205,35 @@ class AbsTask(ABC):
 
     def load_data(self, **kwargs):
         """Load dataset from HuggingFace hub"""
-        print("AbsTask.load_data called")
+        #print("AbsTask.load_data called")
         if self.data_loaded:
             return
         self.dataset = datasets.load_dataset(**self.metadata_dict["dataset"])  # type: ignore
         
         
-        print(f"dataset before transform: {self.dataset}")
+        #print(f"dataset before transform: {self.dataset}")
         temp = self.dataset["test"]["labels"]
         while type(temp[0]) == list:
             temp = [t for s in temp for t in s]
-        print(f"number of samples: {len(temp)}")
+        
+        #print(f"number of samples: {len(temp)}")
 
+        # testing in what format the dataset is loaded
         #print(f"dataset keys: {self.dataset.keys()}")
         #print(f"dataset['test']: {self.dataset['test']}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
         #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
         #print(f"self.metadata_dict: {self.metadata_dict}")
         
-        # here we compute the vocab and pray
+        # here we compute the vocab for hierarchical clustering
         #self.vocab = get_vocab(self.dataset["test"]["sentences"])
         
         self.dataset_transform()
-        print(f"dataset after transform: {self.dataset}")
+        #print(f"dataset after transform: {self.dataset}")
         temp = self.dataset["test"]["labels"]
         while type(temp[0]) == list:
             temp = [t for s in temp for t in s]
-        print(f"number of samples: {len(temp)}")
+        #print(f"number of samples: {len(temp)}")
         #print(f"dataset sentences of type {type(self.dataset["test"]["sentences"])} of length {len(self.dataset["test"]["sentences"])}")
         #print(f"dataset sentences[0] of type {type(self.dataset["test"]["sentences"][0])} of length {len(self.dataset["test"]["sentences"][0])}")
         self.data_loaded = True

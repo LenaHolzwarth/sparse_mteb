@@ -89,7 +89,7 @@ class AbsTaskClassification(AbsTask):
         if not self.data_loaded:
             self.load_data()
 
-        print(f"dataset keys (called in abstaskclassification) {self.dataset.keys()}")
+        #print(f"dataset keys (called in abstaskclassification) {self.dataset.keys()}")
 
         scores = {}
         hf_subsets = list(self.dataset) if self.is_multilingual else ["default"]
@@ -134,7 +134,7 @@ class AbsTaskClassification(AbsTask):
             # compute vocab of train and test split 
             # the position of this means that the vocabulary is computed for each language separately
             # because evaluate_subset passes each language separately to _evaluate_subset
-            print(f"dataset keys: {dataset.keys()}")
+            #print(f"dataset keys: {dataset.keys()}")
             vocab = []
             for split in dataset:
                 vocab += dataset[split]["text"]
@@ -147,7 +147,7 @@ class AbsTaskClassification(AbsTask):
 
             # check if this is a tfidf_svd model
             rev = model.model.mteb_model_meta.revision
-            if "svd" in rev and not rev == "svd_log_old":
+            if "svd" in rev and not rev == "svd_log_old": # svd_log_old computes svd components for each batch
                 # make sure that encode_kwargs["V"] is empty
                 encode_kwargs["V"] = np.array([])
                 # get the svd components for the entire data

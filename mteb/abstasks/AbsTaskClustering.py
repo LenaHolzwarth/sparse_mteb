@@ -66,8 +66,8 @@ class AbsTaskClustering(AbsTask):
 
         print(type(model.model))
 
-        #if model.model.mteb_model_meta.name == "Tfidf":
-        if not type(model.model) == SentenceTransformer:
+        if model.model.mteb_model_meta.name == "Tfidf":
+        #if not type(model.model) == SentenceTransformer:
             # compute vocab of the entire set
             vocab = []
             for cluster_set in dataset:

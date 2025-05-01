@@ -55,7 +55,7 @@ class BitextMiningEvaluator(Evaluator):
         for sub in subsets:
             text += self.sentences[sub]
 
-        # TODO: test this (but how?)
+        
 
         return get_vocab(text)
     
@@ -67,7 +67,7 @@ class BitextMiningEvaluator(Evaluator):
         n_subsets = len(subsets)
 
         # add vocab to encode_kwargs (todo: wrap in some if statement that tests model type)
-        encode_kwargs["vocab"] = self.get_vocab() # TODO: should only call get_vocab if it's necessary
+        # encode_kwargs["vocab"] = self.get_vocab() # TODO: should only call get_vocab if it's necessary
 
         embeddings = {}
         for sub in tqdm.tqdm(subsets, desc=f"Encoding {n_subsets}x{self.n} sentences"):

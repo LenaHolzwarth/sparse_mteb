@@ -65,7 +65,7 @@ class AbsTaskSTS(AbsTask):
 
             # check if this is a tfidf_svd model
             rev = model.model.mteb_model_meta.revision
-            if "svd" in rev and not rev == "svd_log_old":
+            if "svd" in rev and not rev == "svd_log_old": #svd_log_old computes 
                 # make sure that encode_kwargs["V"] is empty
                 encode_kwargs["V"] = np.array([])
                 # get the svd components for the entire data

@@ -53,7 +53,7 @@ class AbsTaskReranking(AbsTask):
         encode_kwargs: dict[str, Any] = {},
         **kwargs: Any,
     ) -> ScoresDict:
-        print("evaluate subset called in abstaskreranking")
+        #print("evaluate subset called in abstaskreranking")
         if model.model.mteb_model_meta.name == "Tfidf":
             # get vocab
             vocab = []
